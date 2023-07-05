@@ -1,0 +1,13 @@
+.default__link {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  text-decoration: none;
+  color: white;
+  transition: opacity 0.2s linear;
+}
+
+.default__link:hover {
+  opacity: 0.6;
+}

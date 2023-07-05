@@ -1,0 +1,23 @@
+.authentication__input-data {
+  width: 100%;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ccc;
+  display: block;
+  background-color: black;
+  box-sizing: border-box;
+  border: 0 solid #ccc;
+  border-bottom-width: 2px;
+  padding-bottom: 13px;
+  text-overflow: ellipsis;
+}
+
+.authentication__input-data::placeholder {
+  transition: opacity 0.3s ease;
+}
+
+.authentication__input-data:focus::placeholder {
+  opacity: 0;
+}

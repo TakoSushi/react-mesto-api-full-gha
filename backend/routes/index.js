@@ -1,0 +1,27 @@
+const router = require('express').Router();
+const { errors } = require('celebrate');
+const userRoutes = require('./users');
+const cardRoutes = require('./cards');
+const authRouter = require('./auth');
+const auth = require('../middlewares/auth');
+const errorsHandler = require('../middlewares/errorshandler');
+const NotFoundError = require('../errors/not-found-err');
+const { requestLogger, errorLogger} = require('./middlewares/logger');
+
+router.use('', authRouter);
+
+router.use(auth);
+
+router.use(requestLogger);
+
+router.use('/users', userRoutes);
+router.use('/cards', cardRoutes);
+
+router.use('*', () => {
+  throw new NotFoundError('Указан неверный путь');
+});
+router.use(errorLogger);
+router.use(errors());
+router.use(errorsHandler);
+
+module.exports = router;
