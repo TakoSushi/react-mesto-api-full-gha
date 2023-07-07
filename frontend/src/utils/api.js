@@ -3,7 +3,7 @@ class Api {
       this._baseUrl = baseUrl;
       this._headers = headers;
   }
-  
+
 _handlePromise(res) {
   if (res.ok) {
     return res.json();
@@ -15,7 +15,8 @@ _handlePromise(res) {
 getUserInfo() {
   return fetch(`${this._baseUrl}/users/me`, {
     method: 'GET',
-    headers: this._headers
+    headers: this._headers,
+    credentials: 'include',
   })
   .then((res) => {
     return this._handlePromise(res);
@@ -26,7 +27,8 @@ setUserInfo(newUserData) {
   return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify(newUserData)
+      credentials: 'include',
+      body: JSON.stringify(newUserData),
     })
     .then((res) => {
       return this._handlePromise(res);
@@ -37,7 +39,8 @@ setUserAvatar(avatarUrl) {
   return fetch(`${this._baseUrl}/users/me/avatar`, {
     method: 'PATCH',
     headers: this._headers,
-    body: JSON.stringify(avatarUrl)
+    credentials: 'include',
+    body: JSON.stringify(avatarUrl),
   })
   .then((res) => {
     return this._handlePromise(res);
@@ -47,7 +50,8 @@ setUserAvatar(avatarUrl) {
 getInitialCards() {
   return fetch(`${this._baseUrl}/cards`, {
     method: 'GET',
-    headers: this._headers
+    headers: this._headers,
+    credentials: 'include',
   })
   .then((res) => {
     return this._handlePromise(res);
@@ -58,8 +62,8 @@ addNewCard(newCardData) {
   return fetch(`${this._baseUrl}/cards`, {
     method: 'POST',
     headers: this._headers,
-    body: JSON.stringify(newCardData)
-
+    credentials: 'include',
+    body: JSON.stringify(newCardData),
   })
   .then((res) => {
     return this._handlePromise(res);
@@ -70,6 +74,7 @@ deleteCard(cardId){
   return fetch(`${this._baseUrl}/cards/${cardId}`, {
     method: 'delete',
     headers: this._headers,
+    credentials: 'include',
   })
   .then((res) => {
     return this._handlePromise(res);
@@ -80,6 +85,7 @@ likeCard(cardId){
   return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
     method: 'put',
     headers: this._headers,
+    credentials: 'include',
   })
   .then((res) => {
     return this._handlePromise(res);
@@ -90,6 +96,7 @@ dislikeCard(cardId){
   return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
     method: 'delete',
     headers: this._headers,
+    credentials: 'include',
   })
   .then((res) => {
     return this._handlePromise(res);
@@ -103,7 +110,7 @@ changeLikeCardStatus(cardId, isLiked) {
 
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-63',
+  baseUrl: 'http://localhost:3000',
   headers: {
     authorization: 'a403427d-ff14-4a62-bf09-33c59e30bcff',
     'Content-Type': 'application/json'
@@ -111,3 +118,4 @@ const api = new Api({
 });
 
 export default api;
+

@@ -14,7 +14,7 @@ import Login from './Login.js';
 import Register from './Register.js';
 import NotFoundPage from './NotFoundPage.js';
 import api from '../utils/api.js';
-import { signUp, signIn, validateUser} from '../utils/auth.js';
+import { signUp, signIn } from '../utils/auth.js';
 import { CurrentUserContext } from '../context/CurrentUserContext.js';
 
 function App() {
@@ -33,13 +33,13 @@ function App() {
 
   const navigate = useNavigate();
 
-  
+
   useEffect( () => {
     if(isLoggedIn){
       api.getUserInfo()
       .then( (userData) => setCurrentUser(userData))
       .catch( (err) => console.warn(err));
-      
+
       api.getInitialCards()
       .then( (cardsData) => setCards(cardsData))
       .catch((err) => console.warn(err));
@@ -47,16 +47,13 @@ function App() {
   }, [isLoggedIn]);
 
   useEffect( () => {
-    handleTokenCheck();
+    handleAutoSignIn();
   }, []);
 
-  function handleTokenCheck() {
-    if(localStorage.getItem('jwt')){
-      const jwt = localStorage.getItem('jwt');
-      validateUser(jwt)
-      .then( ({data}) => {
+  function handleAutoSignIn() {
+    api.getUserInfo()
+      .then( () => {
         setLoggedIn(true);
-        setUserEmail(data.email)
       })
       .catch(err => {
         setLoggedIn(false);
@@ -64,9 +61,6 @@ function App() {
         setInfoTooltipOpen(true);
         console.warn(err);
       });
-    } else {
-      setLoggedIn(false);
-    }
   }
 
   if(isLoggedIn === null) {
@@ -80,7 +74,7 @@ function App() {
   function handleAddPlaceClick() {
     setAddPlacePopupOpen(true);
   }
-  
+
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true);
   }
@@ -92,16 +86,16 @@ function App() {
     setInfoTooltipOpen(false);
     setSelectedCard({});
   }
-  
+
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    
+
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     })
     .catch( err => console.warn(err));
   }
-  
+
   function handleCardDelete(card) {
     api.deleteCard(card._id).then(() => {
       setCards((state) => state.filter((c) => c._id !== card._id));
@@ -117,7 +111,7 @@ function App() {
     .catch( err => console.warn(err))
     .finally( () => setIsLoading (false));
   }
-  
+
   function handleUpdateAvatar(newAvatarUrl) {
     setIsLoading(true);
 
@@ -153,13 +147,12 @@ function App() {
       setIsLoading (false)
     });
   }
-  
+
   function handleUserLoginSubmit(UserData) {
     setIsLoading(true);
 
     signIn(UserData)
-    .then( ({token}) => {
-      localStorage.setItem('jwt', token)
+    .then( () => {
       setLoggedIn(true);
       setUserEmail(UserData.email);
       navigate('/');
@@ -174,14 +167,13 @@ function App() {
 
   function handleExitUser() {
     setLoggedIn(false);
-    localStorage.clear('jwt');
     navigate('/sign-in');
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">      
-        <Header isLoggedIn={isLoggedIn} userEmail={userEmail} onExitUser={handleExitUser}/>        
+      <div className="page">
+        <Header isLoggedIn={isLoggedIn} userEmail={userEmail} onExitUser={handleExitUser}/>
 
         <Routes>
           <Route path='/' element={<ProtectedRoute element={Main}
@@ -201,15 +193,15 @@ function App() {
         </Routes>
 
         <Footer />
-        
-        <EditProfilePopup 
+
+        <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
           isLoading={isLoading}
         />
-        
-        <AddPlacePopup 
+
+        <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
@@ -228,7 +220,7 @@ function App() {
           buttonText="Да"
           name="delete-confirm"
         />
-          
+
         <ImagePopup
           card={selectedCard}
           onClose={closeAllPopups}
@@ -240,7 +232,7 @@ function App() {
           isAuthSuccess={isAuthSuccess}
         ></InfoTooltip>
       </div>
-      
+
     </CurrentUserContext.Provider>
   );
 }

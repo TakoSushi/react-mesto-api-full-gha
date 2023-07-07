@@ -1,12 +1,12 @@
-const baseUrl = 'https://auth.nomoreparties.co'
+const baseUrl = 'http://localhost:3000'
 
 const handlePromise = (res) => {
   if (res.ok) {
     return res.json();
   };
-    
+
   return Promise.reject(`Ошибка при получении объекта ${res.status}`);
-}  
+}
 
 export  const signUp = (newUserData) => {
   return fetch(`${baseUrl}/signup`, {
@@ -14,6 +14,7 @@ export  const signUp = (newUserData) => {
       headers: {
           "Content-Type": "application/json"
       },
+      credentials: 'include',
       body: JSON.stringify(newUserData)
     })
     .then((res) => {
@@ -27,20 +28,8 @@ export const signIn = (UserData) => {
       headers: {
           "Content-Type": "application/json"
       },
+      credentials: 'include',
       body: JSON.stringify(UserData)
-    })
-    .then((res) => {
-      return handlePromise(res);
-  })
-}
-
-export const validateUser = (jwt) => {
-  return fetch(`${baseUrl}/users/me`, {
-      method: 'GET',
-      headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${jwt}`
-      }
     })
     .then((res) => {
       return handlePromise(res);

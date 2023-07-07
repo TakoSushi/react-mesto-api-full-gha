@@ -4,11 +4,11 @@ import { CurrentUserContext } from '../context/CurrentUserContext.js';
 function Card({card, onCardClick, onCardLike, onCardDelete}) {
 
   const currentUser = useContext(CurrentUserContext);
-  const isOwn = card.owner._id === currentUser._id;
+  const isOwn = card.owner === currentUser._id;
 
   const isLiked = card.likes.some(i => i._id === currentUser._id);
-  const cardLikeButtonClassName = ( 
-    `photo-grid__heart ${isLiked && 'photo-grid__heart_active'}` 
+  const cardLikeButtonClassName = (
+    `photo-grid__heart ${isLiked && 'photo-grid__heart_active'}`
   )
 
   function handleClick() {
@@ -51,7 +51,7 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
         </div>
       </div>
     </li>
-  ) 
+  )
 }
 
 export default Card;
