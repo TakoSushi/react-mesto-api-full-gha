@@ -5,7 +5,6 @@ const NotFoundError = require('../errors/not-found-err');
 
 const createUser = (req, res, next) => {
   const newUser = req.body;
-
   bcrypt.hash(newUser.password, 10)
     .then((hash) => User.create({
       name: newUser.name,

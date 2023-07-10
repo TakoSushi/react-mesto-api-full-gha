@@ -20,6 +20,7 @@ router.use('/cards', cardRoutes);
 router.use('*', () => {
   throw new NotFoundError('Указан неверный путь');
 });
+
 router.use(errorLogger);
 router.use(errors());
 router.use(errorsHandler);
