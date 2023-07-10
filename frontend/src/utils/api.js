@@ -110,10 +110,10 @@ changeLikeCardStatus(cardId, isLiked) {
 
 const api = new Api({
   baseUrl: 'http://api.kuzora-petr.nomoredomains.work',
-  headers: {
+  // headers: {
     // authorization: 'a403427d-ff14-4a62-bf09-33c59e30bcff',
-    // 'Content-Type': 'application/json'
-  }
+  //   'Content-Type': 'application/json'
+  // }
 });
 
 export default api;
