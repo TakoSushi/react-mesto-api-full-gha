@@ -1,4 +1,4 @@
-const baseUrl = 'http://api.kuzora-petr.nomoredomains.work'
+const baseUrl = 'https://api.kuzora-petr.nomoredomains.work'
 
 const handlePromise = (res) => {
   if (res.ok) {
