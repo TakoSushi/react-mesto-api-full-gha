@@ -1,4 +1,5 @@
-const baseUrl = 'https://api.kuzora-petr.nomoredomains.work'
+// const baseUrl = 'https://api.kuzora-petr.nomoredomains.work';
+const baseUrl = 'https://localhost:8080';
 
 const handlePromise = (res) => {
   if (res.ok) {
@@ -30,6 +31,20 @@ export const signIn = (UserData) => {
       },
       credentials: 'include',
       body: JSON.stringify(UserData)
+    })
+    .then((res) => {
+      return handlePromise(res);
+  })
+}
+
+export const signOut = () => {
+  return fetch(`${baseUrl}/logout`, {
+      method: 'GET',
+      headers: {
+          "Content-Type": "application/json"
+      },
+      credentials: 'include',
+      body: JSON.stringify()
     })
     .then((res) => {
       return handlePromise(res);

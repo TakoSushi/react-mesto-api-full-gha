@@ -84,6 +84,13 @@ const login = (req, res, next) => {
     .catch(next);
 };
 
+const logout = (req, res) => {
+  res
+    .clearCookie('access_token')
+    .status(200)
+    .json({ message: 'Вы успешно вышли из аккаунта' });
+};
+
 module.exports = {
   createUser,
   getAllUsers,
@@ -92,4 +99,5 @@ module.exports = {
   changeUserData,
   changeUserAvatar,
   login,
+  logout,
 };
