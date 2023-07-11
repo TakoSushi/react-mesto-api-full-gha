@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { celebrate, Joi, Segments } = require('celebrate');
 const { regexpLink } = require('../utils/regexp');
-const { createUser, login, logout } = require('../controllers/users');
+const { createUser, login } = require('../controllers/users');
 
 router.post('/signup', celebrate({
   [Segments.BODY]: Joi.object().keys({
@@ -18,6 +18,5 @@ router.post('/signin', celebrate({
     password: Joi.string().required().min(8),
   }),
 }), login);
-router.get('/logout', logout);
 
 module.exports = router;

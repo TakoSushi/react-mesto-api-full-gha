@@ -14,7 +14,7 @@ import Login from './Login.js';
 import Register from './Register.js';
 import NotFoundPage from './NotFoundPage.js';
 import api from '../utils/api.js';
-import { signUp, signIn, signOut } from '../utils/auth.js';
+import { signUp, signIn } from '../utils/auth.js';
 import { CurrentUserContext } from '../context/CurrentUserContext.js';
 
 function App() {
@@ -166,18 +166,8 @@ function App() {
   }
 
   function handleExitUser() {
-    setIsLoading(true);
-
-    signOut()
-    .then(() => {
-      setLoggedIn(false);
-      navigate('/sign-in');
-    })
-    .catch(err => {
-      setInfoTooltipOpen(true);
-      console.log(err);
-    })
-    .finally( () => setIsLoading (false));
+    setLoggedIn(false);
+    navigate('/sign-in');
   }
 
   return (
