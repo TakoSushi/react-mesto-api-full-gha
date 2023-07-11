@@ -23,15 +23,11 @@ mongoose.connect(DB_URL)
 
 const app = express();
 
+app.options('*', cors());
 app.use(cors({
-  origin: '*',
+  origin: ['https://kuzora-petr.nomoredomains.work', 'http://kuzora-petr.nomoredomains.work', 'www.kuzora-petr.nomoredomains.work'],
   credentials: true,
-  optionSuccessStatus: 200,
 }));
-// app.use(cors({
-//   origin: 'https://kuzora-petr.nomoredomains.work',
-//   credentials: true,
-// }));
 
 app.use(cookieParser());
 app.use(helmet());
