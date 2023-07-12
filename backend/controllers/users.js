@@ -84,6 +84,13 @@ const login = (req, res, next) => {
     .catch(next);
 };
 
+const logout = (req, res) => {
+  res
+    .clearCookie('jwt')
+    .status(200)
+    .send({ message: 'Выход успешно выполнен' });
+};
+
 module.exports = {
   createUser,
   getAllUsers,
@@ -92,4 +99,5 @@ module.exports = {
   changeUserData,
   changeUserAvatar,
   login,
+  logout,
 };
