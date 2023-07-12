@@ -36,13 +36,13 @@ app.use(cookieParser());
 app.use(helmet());
 app.use(bodyParser.json());
 
-app.use(limiter, routes);
-
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
+
+app.use(limiter, routes);
 
 app.use(routes);
 

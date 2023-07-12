@@ -10,7 +10,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.62.209
+IP 158.160.62.209
 
 Frontend https://kuzora-petr.nomoredomains.work/
 
