@@ -8,7 +8,7 @@ const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const routes = require('./routes');
 
-const { PORT = 8080, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
+const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
