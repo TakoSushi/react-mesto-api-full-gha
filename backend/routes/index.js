@@ -10,9 +10,9 @@ const { requestLogger, errorLogger } = require('../middlewares/logger');
 
 router.use('', authRouter);
 
-router.use(auth);
-
 router.use(requestLogger);
+
+router.use(auth);
 
 router.use('/users', userRoutes);
 router.use('/cards', cardRoutes);
