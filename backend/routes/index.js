@@ -6,11 +6,9 @@ const authRouter = require('./auth');
 const auth = require('../middlewares/auth');
 const errorsHandler = require('../middlewares/errorshandler');
 const NotFoundError = require('../errors/not-found-err');
-const { requestLogger, errorLogger } = require('../middlewares/logger');
+const { errorLogger } = require('../middlewares/logger');
 
 router.use('', authRouter);
-
-router.use(requestLogger);
 
 router.use(auth);
 

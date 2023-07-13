@@ -52,8 +52,9 @@ function App() {
 
   function handleAutoSignIn() {
     api.getUserInfo()
-      .then( () => {
+      .then( (UserData) => {
         setLoggedIn(true);
+        setUserEmail(UserData.email);
       })
       .catch(err => {
         setLoggedIn(false);
