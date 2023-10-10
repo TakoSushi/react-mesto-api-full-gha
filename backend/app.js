@@ -9,7 +9,7 @@ const rateLimit = require('express-rate-limit');
 const { requestLogger } = require('./middlewares/logger');
 const routes = require('./routes');
 
-const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
+const { PORT = 8080, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
@@ -28,9 +28,7 @@ app.use(requestLogger);
 
 app.use(cors({
   origin: [
-    'https://kuzora-petr.nomoredomains.work',
-    'http://kuzora-petr.nomoredomains.work',
-    'www.kuzora-petr.nomoredomains.work',
+    'http://localhost:3000',
   ],
   credentials: true,
 }));

@@ -1,4 +1,4 @@
-const baseUrl = 'https://api.kuzora-petr.nomoredomains.work';
+const baseUrl = 'http://localhost:8080';
 
 const handlePromise = (res) => {
   if (res.ok) {
