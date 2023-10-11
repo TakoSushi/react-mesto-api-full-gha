@@ -1,5 +1,3 @@
-[![Статус тестов](../../actions/workflows/tests.yml/badge.svg)](../../actions/workflows/tests.yml)
-
 # Проект "Место"
   _Учебный проект в рамках курса по веб-разработке_
   
